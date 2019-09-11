@@ -26,7 +26,7 @@ import {
     HttpClientModule,
     AppRoutingModule,
     SharedModule,
-    StateModule
+    StateModule.forRoot()
   ],
   providers: [
     {
@@ -46,4 +46,4 @@ import {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

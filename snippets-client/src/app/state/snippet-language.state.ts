@@ -1,4 +1,4 @@
-import { buildState } from '@briebug/ngrx-auto-entity';
+import { buildState, IEntityState } from '@briebug/ngrx-auto-entity';
 import { createReducer } from '@ngrx/store';
 import { SnippetLanguage } from '../models';
 
@@ -7,6 +7,7 @@ export const {
   selectors: snippetLanguageSelectors,
   facade: SnippetLanguageFacadeBase
 } = buildState(SnippetLanguage);
-export const snippetLanguageReducer = createReducer(
-  snippetLanguageInitialState
-);
+
+export function snippetLanguageReducer(state = snippetLanguageInitialState): IEntityState<SnippetLanguage> {
+  return state;
+}
