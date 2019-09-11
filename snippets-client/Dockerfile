@@ -17,7 +17,7 @@ COPY . /src
 
 # Set the working directory to /src then build the app.
 WORKDIR /src
-RUN ng build --prod --sourceMap=true --output-path=dist
+RUN ng build --prod --sourceMap=true --aot=false --output-path=dist
 
 # Switch back to dialog for any ad-hoc use of apt-get
 ENV DEBIAN_FRONTEND=
