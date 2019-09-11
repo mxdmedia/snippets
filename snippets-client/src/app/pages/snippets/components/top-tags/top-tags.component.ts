@@ -25,16 +25,16 @@ export class TopTagsComponent implements OnInit, OnChanges {
 
   @Output() selectTags = new EventEmitter<SnippetTag[]>();
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngOnChanges(simpleChanges: SimpleChanges) {
     console.log('onChanges');
-    const newSelectedTags: SelectedTag[] = this.tags.map(tag => {
+    const newSelectedTags: SelectedTag[] = this.tags ? this.tags.map(tag => {
       const existing = this.selectedTags.find(st => st.tag.tag === tag.tag);
       return { tag, selected: existing ? existing.selected : false };
-    });
+    }) : [];
     this.selectedTags = newSelectedTags;
   }
 
