@@ -14,7 +14,7 @@ EXPOSE 8000
 
 # Migrates the database, uploads staticfiles, and runs the production server
 CMD python wait_for_postgres.py && \
-  sh load_data.sh && \
   python manage.py migrate && \
   python manage.py collectstatic --noinput && \
+  sh load_data.sh && \
   newrelic-admin run-program gunicorn --bind 0.0.0.0:8000 --access-logfile - snippetsapi.wsgi:application
