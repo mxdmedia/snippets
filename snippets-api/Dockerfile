@@ -13,8 +13,8 @@ WORKDIR /code
 EXPOSE 8000
 
 # Migrates the database, uploads staticfiles, and runs the production server
-CMD ./wait_for_postgres.py && \
+CMD python wait_for_postgres.py && \
   sh load_data.sh && \
-  ./manage.py migrate && \
-  ./manage.py collectstatic --noinput && \
+  python manage.py migrate && \
+  python manage.py collectstatic --noinput && \
   newrelic-admin run-program gunicorn --bind 0.0.0.0:8000 --access-logfile - snippetsapi.wsgi:application
