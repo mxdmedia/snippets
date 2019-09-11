@@ -1,4 +1,5 @@
 from collections import OrderedDict
+from time import sleep
 
 from django.db.models import Count
 
@@ -157,5 +158,19 @@ class SnippetTagViewSet(viewsets.ModelViewSet):
     ordering_fields = ['tag', 'count']
     ordering = '-count'
 
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
     def get_queryset(self):
+        # Note, testing long response times.  Dont check
+        # this code in!!!
+        sleep(3)
         return self.queryset.annotate(count=Count('snippets'))
